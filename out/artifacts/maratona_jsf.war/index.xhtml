@@ -7,7 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
 >
-
+<h:body>
 <p:importEnum type="br.com.devdojo.maratonajsf.model.enums.Turno" var="Turno" allSuffix="ALL_ENUM_VALUES" />
 
 
@@ -53,11 +53,34 @@
     <h:outputLabel value="#{entry.key}-- #{entry.value}"/><br />
 </ui:repeat>
 
+<!--Ejecutando metodos con BEan-->
 #{estudianteRegistrarBean.executar()}
 #{estudianteRegistrarBean.executar('xuxu Beleza')}
 #{estudianteRegistrarBean.executar(estudianteRegistrarBean.estudiante.nombre)}
 #{estudianteRegistrarBean.executarRetorno(estudianteRegistrarBean.estudiante.nombre)}
 <h:form>
-<h:commandButton value="Ir para proxima pagina" actionListener="#{estudianteRegistrarBean.IrParaIndex2()}" />
+<h:commandButton value="Ir para proxima pagina" actionListener="#{estudianteRegistrarBean.IrParaIndex2()}" /> <br />
+
+<!--Pasando valores EL para funciones JS-->
+    <h:commandButton value="Soltar magia" onclick="fazMagica('Hadouken') "   />
+    <h:commandButton value="Alerta Nombre" onclick="alertaNombre('#{estudianteRegistrarBean.estudiante.nombre}') "   />
 </h:form>
+<!--Imprimiento CSS con EL-->
+
+<ui:repeat value="#{estudianteRegistrarBean.nombresList}" var="nome" varStatus="status">
+    <h:outputLabel value="#{nome}" style="color: #{status.index mod 2== 0 ? 'red' : 'aquamarine' }" /><br />
+</ui:repeat>
+</h:body>
+
+<script type="text/javascript">
+
+function fazMagica(magica){
+    alert(magica);
+}
+
+function alertaNombre(nombre){
+    alert(nombre);
+}
+
+</script>
 </html>
