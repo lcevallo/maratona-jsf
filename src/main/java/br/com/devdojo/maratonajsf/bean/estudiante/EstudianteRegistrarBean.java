@@ -3,6 +3,7 @@ package br.com.devdojo.maratonajsf.bean.estudiante;
 
 import br.com.devdojo.maratonajsf.model.Estudiante;
 
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.*;
@@ -13,6 +14,7 @@ import static java.util.Arrays.asList;
  * Created by Windows 10 Turbo (L) on 23/04/2017.
  */
 @Named
+@ViewScoped
 public class EstudianteRegistrarBean implements Serializable {
     private Estudiante estudiante = new Estudiante();
 
@@ -20,6 +22,8 @@ public class EstudianteRegistrarBean implements Serializable {
     private List<String> nombresList=asList("Abba","Heide","Gabriel","Luis");
     private Set<String> nombresSet = new HashSet<>(asList("Goku","Luffy","Naruto","Crilin"));
     private Map<String,String> nomesMap=new HashMap<>();
+    private boolean mostrarNotas;
+    private boolean mostrarLink;
 
     {
         nomesMap.put("Goku", "el mas fuerte");
@@ -49,11 +53,51 @@ public class EstudianteRegistrarBean implements Serializable {
        return "Que lindo ?" +param;
     }
 
+
     public String IrParaIndex2(){
         System.out.println("Entro con action Listener");
        return "index2?faces-redirect=true";
     }
 
+    public void exhibirNotas(){
+        this.mostrarNotas=true;
+        System.out.println(this.mostrarNotas);
+    }
+
+    public void esconderNotas()
+    {
+
+        this.mostrarNotas=false;
+
+    }
+
+    public void exhibirLink(){
+        this.mostrarLink=true;
+        System.out.println(this.mostrarLink);
+    }
+
+    public void esconderLink()
+    {
+
+        this.mostrarLink=false;
+
+    }
+
+    public boolean isMostrarNotas() {
+        return mostrarNotas;
+    }
+
+    public void setMostrarNotas(boolean mostrarNotas) {
+        this.mostrarNotas = mostrarNotas;
+    }
+
+    public boolean isMostrarLink() {
+        return mostrarLink;
+    }
+
+    public void setMostrarLink(boolean mostrarLink) {
+        this.mostrarLink = mostrarLink;
+    }
 
     public Estudiante getEstudiante() {
         return estudiante;

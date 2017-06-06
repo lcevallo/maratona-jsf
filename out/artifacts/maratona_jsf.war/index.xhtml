@@ -7,6 +7,10 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
 >
+<h:head>
+
+
+</h:head>
 <h:body>
 <p:importEnum type="br.com.devdojo.maratonajsf.model.enums.Turno" var="Turno" allSuffix="ALL_ENUM_VALUES" />
 
@@ -70,6 +74,40 @@
 <ui:repeat value="#{estudianteRegistrarBean.nombresList}" var="nome" varStatus="status">
     <h:outputLabel value="#{nome}" style="color: #{status.index mod 2== 0 ? 'red' : 'aquamarine' }" /><br />
 </ui:repeat>
+<h:form id="form">
+    <br />
+    <h:commandButton value="Mostrar Notas" >
+            <f:ajax render="notasGrid" listener="#{estudianteRegistrarBean.exhibirNotas()}"  />
+    </h:commandButton>
+    <br />
+    <h:commandButton value="Esconder Notas" >
+        <f:ajax render="notasGrid" listener="#{estudianteRegistrarBean.esconderNotas()}"  />
+    </h:commandButton>
+
+
+    <h:outputText value="#{estudianteRegistrarBean.estudiante.nombre}" />
+    <h:outputText value="#{estudianteRegistrarBean.estudiante.apellido}" />
+    <h:outputText value="#{estudianteRegistrarBean.estudiante.turno}" />
+    <h:panelGrid id="notasGrid">
+    <h:outputText value="#{estudianteRegistrarBean.estudiante.nota1}" rendered="#{estudianteRegistrarBean.mostrarNotas}"  />
+    <h:outputText value="#{estudianteRegistrarBean.estudiante.nota2}" rendered="#{estudianteRegistrarBean.mostrarNotas}"  />
+    <h:outputText value="#{estudianteRegistrarBean.estudiante.nota3}" rendered="#{estudianteRegistrarBean.mostrarNotas}"  />
+    </h:panelGrid><br />
+
+    <h:commandButton value="Mostrar Link" >
+        <f:ajax render="pgLink" listener="#{estudianteRegistrarBean.exhibirLink()}"  />
+    </h:commandButton>
+    <br />
+    <h:commandButton value="Esconder Link" >
+        <f:ajax render="pgLink" listener="#{estudianteRegistrarBean.esconderLink()}"  />
+    </h:commandButton>
+<h:panelGroup id="pgLink">
+<ui:fragment id="fragmentLink" rendered="#{estudianteRegistrarBean.mostrarLink}">
+    <a href="http://www.google.es" target="_blank">www.google.es</a>
+</ui:fragment>
+</h:panelGroup>
+
+</h:form>
 </h:body>
 
 <script type="text/javascript">
