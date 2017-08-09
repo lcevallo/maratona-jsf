@@ -3,6 +3,8 @@ package br.com.devdojo.maratonajsf.bean.estudiante;
 
 import br.com.devdojo.maratonajsf.model.Estudiante;
 
+import javax.el.LambdaExpression;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -81,6 +83,12 @@ public class EstudianteRegistrarBean implements Serializable {
 
         this.mostrarLink=false;
 
+    }
+
+    public void calcularCubo(LambdaExpression le,long value)
+    {
+       long result= (long) le.invoke(FacesContext.getCurrentInstance().getELContext(),value);
+        System.out.println(result);
     }
 
     public boolean isMostrarNotas() {
